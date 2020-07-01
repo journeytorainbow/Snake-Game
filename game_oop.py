@@ -25,7 +25,7 @@ YELLOW = (255, 255, 102)
 
 Font1 = pygame.font.SysFont('Impact', 80)
 Font2 = pygame.font.SysFont('Impact', 30)
-Font3 = pygame.font.SysFont('Impact', 20)
+Font3 = pygame.font.SysFont('Impact', 25)
 
 record = []
 
