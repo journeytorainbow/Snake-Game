@@ -27,6 +27,13 @@ Font1 = pygame.font.SysFont('Impact', 80)
 Font2 = pygame.font.SysFont('Impact', 30)
 Font3 = pygame.font.SysFont('Impact', 25)
 
+feed = pygame.mixer.Sound("resources/audio/feed.ogg")
+hit = pygame.mixer.Sound("resources/audio/hit.ogg")
+feed.set_volume(0.6)
+pygame.mixer.music.load("resources/audio/Liberation.mp3")
+pygame.mixer.music.play(-1, 0.0)
+pygame.mixer.music.set_volume(0.4)
+
 record = []
 
 class Item:
@@ -65,9 +72,12 @@ class Snake:
         head = (xpos, ypos)
 
         game_over = head in bomb.position or head in self.bodies or head[0] < 0 or head[1] < 0 or head[0] >= x_box or head[1] >= y_box
+        if game_over:
+            hit.play()
 
         self.bodies.insert(0, head)
         if head in food.position:
+            feed.play()
             food.position.remove(head)
             food.add_item(self)
         elif head in bomb.position:
@@ -135,6 +145,7 @@ def main():
         
         game_over = snake.move(key)
         if game_over:
+            # hit.play()
             msg1 = Font1.render("Game Over!", True, RED)
             msg2 = Font2.render("Try again! [press spacebar]", True, WHITE)
             running = False
