@@ -76,7 +76,7 @@ def add_bomb(snake):
         bombs.append(pos)
         break
 
-def playing_paint(snake, time_render):
+def playing_paint(snake):
     screen.fill(0)
     snake.draw()
     for food in foods:
@@ -87,7 +87,8 @@ def playing_paint(snake, time_render):
         pygame.draw.line(screen, LINE_COLOR, (xpos*x_length, 0), (xpos*x_length, height))        
     for ypos in range(20):
         pygame.draw.line(screen, LINE_COLOR, (0, ypos*y_length), (width, ypos*y_length))        
-    
+
+def time_paint(time_render):
     textRect = time_render.get_rect()
     textRect.topright = (screen.get_width()-5, 5)
     screen.blit(time_render, textRect)
@@ -128,7 +129,8 @@ def main():
             msg2 = Font2.render("Try again![press spacebar]", True, WHITE)
             running = False
         
-        playing_paint(snake, time_render)
+        playing_paint(snake)
+        time_paint(time_render)
         fpsClock.tick(FPS)
 
     gameover_paint(msg1, msg2)
