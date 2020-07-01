@@ -91,6 +91,7 @@ def playing_paint(snake, food, bomb):
         pygame.draw.line(screen, LINE_COLOR, (xpos*x_length, 0), (xpos*x_length, height))        
     for ypos in range(20):
         pygame.draw.line(screen, LINE_COLOR, (0, ypos*y_length), (width, ypos*y_length))        
+    pygame.display.flip()
 
 def time_paint(time_render):
     textRect = time_render.get_rect()
@@ -135,7 +136,7 @@ def main():
         game_over = snake.move(key)
         if game_over:
             msg1 = Font1.render("Game Over!", True, RED)
-            msg2 = Font2.render("Try again![press spacebar]", True, WHITE)
+            msg2 = Font2.render("Try again! [press spacebar]", True, WHITE)
             running = False
         
         playing_paint(snake, food, bomb)
