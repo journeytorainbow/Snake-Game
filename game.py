@@ -19,9 +19,11 @@ PINK = (232, 93, 244)
 MINT = (88, 232, 220)
 RED = (244, 19, 53)
 WHITE = (255, 255, 255)
+GREEN = (157, 201, 90)
 
 foods = []
 snake = []
+bombs = []
 
 # 먹이 추가
 def add_food():
@@ -30,6 +32,14 @@ def add_food():
         if pos in foods or pos in snake:
             continue
         foods.append(pos)
+        break
+
+def add_bomb():
+    while True:
+        pos = (random.randint(0, x_box - 1), random.randint(0, y_box - 1))
+        if pos in bombs or pos in foods or pos in snake:
+            continue
+        bombs.append(pos)
         break
 
 # 먹이 이동 
@@ -48,6 +58,9 @@ def playing_paint():
     # 먹이 그리기
     for food in foods:
         pygame.draw.ellipse(screen, PINK, Rect((food[0]*x_length, food[1]*y_length), (x_length, y_length)))
+    # 폭탄 그리기
+    for bomb in bombs:
+        pygame.draw.ellipse(screen, GREEN, Rect((bomb[0]*x_length, bomb[1]*y_length), (x_length, y_length)))
     # 뱀 몸통 그리기
     for body in snake:
         pygame.draw.rect(screen, MINT, Rect((body[0]*x_length, body[1]*y_length), (x_length, y_length)))
@@ -69,9 +82,12 @@ def main():
     msg = None
     running = True
     num_food = 10
+    num_bomb = 3
     snake.append((int(x_box/2), int(y_box/2)))
     for _ in range(num_food):
         add_food()
+    for _ in range(num_bomb):
+        add_bomb()
     
     while running:
         for event in pygame.event.get():
@@ -91,7 +107,7 @@ def main():
         elif key == K_DOWN:
             head = (snake[0][0], snake[0][1] + 1)
         
-        if head in snake or head[0] < 0 or head[1] < 0 or head[0] > x_box - 1 or head[1] > y_box - 1:
+        if head in bombs or head in snake or head[0] < 0 or head[1] < 0 or head[0] > x_box - 1 or head[1] > y_box - 1:
             msg1 = Font1.render("Game Over!", True, RED)
             msg2 = Font2.render("Try again![press spacebar]", True, WHITE)
             running = False
@@ -116,4 +132,5 @@ while True:
         elif event.type == KEYDOWN and event.key == K_SPACE:
             foods = []
             snake = []
+            bombs = []
             main() # replay
