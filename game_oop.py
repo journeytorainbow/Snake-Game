@@ -21,10 +21,13 @@ MINT = (88, 232, 220)
 RED = (244, 19, 53)
 WHITE = (255, 255, 255)
 GREEN = (157, 201, 90)
+YELLOW = (255, 255, 102)
 
 Font1 = pygame.font.SysFont('Impact', 80)
 Font2 = pygame.font.SysFont('Impact', 30)
 Font3 = pygame.font.SysFont('Impact', 20)
+
+record = []
 
 class Snake:
     def __init__(self, pos):
@@ -94,11 +97,16 @@ def time_paint(time_render):
     screen.blit(time_render, textRect)
     pygame.display.flip()
 
-def gameover_paint(msg1, msg2):
+def gameover_paint(msg1, msg2, msg3, msg4):
     textRect = msg1.get_rect(center=(width//2, height//2))
     screen.blit(msg1, textRect)
     textRect = msg2.get_rect(center=(width//2, height//2 + 50))
     screen.blit(msg2, textRect)
+    textRect = msg3.get_rect(center=(width//2, height//2 + 100))
+    screen.blit(msg3, textRect)
+    textRect = msg4.get_rect(center=(width//2, height//2 + 140))
+    screen.blit(msg4, textRect)
+
     pygame.display.flip()
 
 def main():
@@ -133,7 +141,10 @@ def main():
         time_paint(time_render)
         fpsClock.tick(FPS)
 
-    gameover_paint(msg1, msg2)
+    msg3 = Font3.render("Current record : " + str(int((time_past)/60000)) + ":" + str(int((time_past)/1000%60)).zfill(2), True, WHITE)
+    record.append(time_past)
+    msg4 = Font3.render("Highest record : " + str(int((max(record))/60000)) + ":" + str(int((max(record))/1000%60)).zfill(2), True, YELLOW)
+    gameover_paint(msg1, msg2, msg3, msg4)
   
 main()
 while True:
