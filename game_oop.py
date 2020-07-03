@@ -4,6 +4,7 @@ import sys, pygame, random
 from pygame.locals import *
 
 pygame.init()
+pygame.mixer.init()
 width, height = 600, 600
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Snake Game")
