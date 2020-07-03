@@ -11,8 +11,6 @@ pygame.display.set_caption("Snake Game")
 FPS = 8
 fpsClock = pygame.time.Clock()
 
-foods = []
-bombs = []
 x_box, y_box = 20, 20
 x_length = width/x_box
 y_length = height/y_box
@@ -147,7 +145,6 @@ def main():
         
         game_over = snake.move(key)
         if game_over:
-            # hit.play()
             msg1 = Font1.render("Game Over!", True, RED)
             msg2 = Font2.render("Try again! [press spacebar]", True, WHITE)
             running = False
