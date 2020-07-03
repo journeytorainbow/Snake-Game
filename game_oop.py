@@ -147,17 +147,17 @@ def main():
         if game_over:
             msg1 = Font1.render("Game Over!", True, RED)
             msg2 = Font2.render("Try again! [press spacebar]", True, WHITE)
+            msg3 = Font3.render("Current record : " + str(int((time_past)/60000)) + ":" + str(int((time_past)/1000%60)).zfill(2), True, WHITE)
+            record.append(time_past)
+            msg4 = Font3.render("Highest record : " + str(int((max(record))/60000)) + ":" + str(int((max(record))/1000%60)).zfill(2), True, YELLOW)
             running = False
         
         playing_paint(snake, food, bomb)
         time_paint(time_render)
         fpsClock.tick(FPS)
 
-    msg3 = Font3.render("Current record : " + str(int((time_past)/60000)) + ":" + str(int((time_past)/1000%60)).zfill(2), True, WHITE)
-    record.append(time_past)
-    msg4 = Font3.render("Highest record : " + str(int((max(record))/60000)) + ":" + str(int((max(record))/1000%60)).zfill(2), True, YELLOW)
     gameover_paint(msg1, msg2, msg3, msg4)
-  
+    
 main()
 while True:
     for event in pygame.event.get():
