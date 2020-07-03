@@ -28,10 +28,10 @@ Font1 = pygame.font.SysFont('Impact', 80)
 Font2 = pygame.font.SysFont('Impact', 30)
 Font3 = pygame.font.SysFont('Impact', 25)
 
-feed = pygame.mixer.Sound("resources/audio/feed.ogg")
-hit = pygame.mixer.Sound("resources/audio/hit.ogg")
+feed = pygame.mixer.Sound("resources/audio/feed.wav")
+hit = pygame.mixer.Sound("resources/audio/hit.wav")
 feed.set_volume(0.6)
-pygame.mixer.music.load("resources/audio/Liberation.mp3")
+pygame.mixer.music.load("resources/audio/Liberation.wav")
 pygame.mixer.music.play(-1, 0.0)
 pygame.mixer.music.set_volume(0.4)
 
